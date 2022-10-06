@@ -36,3 +36,16 @@
     transform: rotate(360deg);
   }
 }
+
+.container {
+  display: flex;
+  flex: 1;
+  gap: 10px;
+}
+
+.card-container {
+  width: 5rem;
+  height: 2rem;
+  background-color: black;
+  color: white;
+}

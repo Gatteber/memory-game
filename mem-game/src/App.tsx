@@ -1,28 +1,48 @@
 import './App.css';
-import { Card } from './components/Card';
-import { useState, useEffect } from 'react';
-import CardRandom from './components/CardRandom';
-
-const getRandomNum = () => Math.floor(Math.random() * 3)
+import { useEffect, useState } from 'react';
+import Card from './components/Card';
 
 function App() {
-  const [num, setNum] = useState(getRandomNum());
+  const getRandomNum = () => {
+    const array = [];
+    for (let i=0; i < 5; i++) {
+      const generate = () => {
+        return Math.floor(Math.random() * 5);
+      }
+      array.push(generate());
+    }
+    return array;
+  }
+  const getBadRandomNum = () => Math.floor(Math.random() * 5)
 
-  // useEffect(() => {
-  //   const getRandomNum = () => {
-  //     return setNum(Math.floor(Math.random() * 3))
-  //   }
-  //   getRandomNum();
-  // },[])
+  const [num, setNum] = useState(getRandomNum);
+  const [badNum, setBadNum] = useState(getBadRandomNum);
+  const [score, setScore] = useState(0)
+  const [maxScore, setMaxScore] = useState(0);
+
+  useEffect(() => {
+    if(score >= maxScore) {
+      setMaxScore(score);
+    }
+    setNum(getRandomNum);
+  },[score, maxScore])
 
   return (
     <div>
-      <Card picture={num} />
-      <Card picture={num} />
-      <Card picture={num} />
-      <CardRandom />
-      <CardRandom />
-      <CardRandom />
+      <div className='container'>
+      <Card badNum={badNum} setScore={setScore} num={num[0]} setNum={setNum} />
+      <Card badNum={badNum} setScore={setScore} num={num[1]} setNum={setNum} />
+      <Card badNum={badNum} setScore={setScore} num={num[2]} setNum={setNum} />
+      <Card badNum={badNum} setScore={setScore} num={num[3]} setNum={setNum} />
+      <Card badNum={badNum} setScore={setScore} num={num[4]} setNum={setNum} />
+      {badNum}
+      <div>
+        score: {score}
+      </div>
+      <div>
+        max score: {maxScore}
+      </div>
+      </div>
     </div>
   );
 }
