@@ -1,6 +1,9 @@
 import './App.css';
 import { useEffect, useState } from 'react';
 import Card from './components/Card';
+import {ReactComponent as AmericaLogo } from './icons/America.svg';
+const logoPath = require('./icons/America.svg') as string;
+
 
 function App() {
   const getRandomNum = () => {
@@ -42,6 +45,7 @@ function App() {
       <div>
         max score: {maxScore}
       </div>
+      <AmericaLogo />
       </div>
     </div>
   );
